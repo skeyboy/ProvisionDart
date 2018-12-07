@@ -10,6 +10,10 @@
 		534790E221BAB4DE00E51CC3 /* GenerateThumbnailForURL.c in Sources */ = {isa = PBXBuildFile; fileRef = 534790E121BAB4DE00E51CC3 /* GenerateThumbnailForURL.c */; };
 		534790E421BAB4DE00E51CC3 /* GeneratePreviewForURL.c in Sources */ = {isa = PBXBuildFile; fileRef = 534790E321BAB4DE00E51CC3 /* GeneratePreviewForURL.c */; };
 		534790E621BAB4DE00E51CC3 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 534790E521BAB4DE00E51CC3 /* main.c */; };
+		534790EE21BAB65F00E51CC3 /* ic_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 534790ED21BAB65E00E51CC3 /* ic_launcher.png */; };
+		534790F121BAB98B00E51CC3 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534790F021BAB98B00E51CC3 /* QuickLook.framework */; };
+		534790F321BAB99200E51CC3 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534790F221BAB99200E51CC3 /* AppKit.framework */; };
+		534790F721BAD63100E51CC3 /* heightlight.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 534790F621BAD63100E51CC3 /* heightlight.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +22,10 @@
 		534790E321BAB4DE00E51CC3 /* GeneratePreviewForURL.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = GeneratePreviewForURL.c; sourceTree = "<group>"; };
 		534790E521BAB4DE00E51CC3 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		534790E721BAB4DE00E51CC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		534790ED21BAB65E00E51CC3 /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
+		534790F021BAB98B00E51CC3 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		534790F221BAB99200E51CC3 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		534790F621BAD63100E51CC3 /* heightlight.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = heightlight.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,6 +33,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				534790F321BAB99200E51CC3 /* AppKit.framework in Frameworks */,
+				534790F121BAB98B00E51CC3 /* QuickLook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,6 +46,7 @@
 			children = (
 				534790E021BAB4DE00E51CC3 /* ProvisionDart */,
 				534790DF21BAB4DE00E51CC3 /* Products */,
+				534790EF21BAB98A00E51CC3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -50,12 +61,23 @@
 		534790E021BAB4DE00E51CC3 /* ProvisionDart */ = {
 			isa = PBXGroup;
 			children = (
+				534790F621BAD63100E51CC3 /* heightlight.bundle */,
+				534790ED21BAB65E00E51CC3 /* ic_launcher.png */,
 				534790E121BAB4DE00E51CC3 /* GenerateThumbnailForURL.c */,
 				534790E321BAB4DE00E51CC3 /* GeneratePreviewForURL.c */,
 				534790E521BAB4DE00E51CC3 /* main.c */,
 				534790E721BAB4DE00E51CC3 /* Info.plist */,
 			);
 			path = ProvisionDart;
+			sourceTree = "<group>";
+		};
+		534790EF21BAB98A00E51CC3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				534790F221BAB99200E51CC3 /* AppKit.framework */,
+				534790F021BAB98B00E51CC3 /* QuickLook.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +147,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				534790F721BAD63100E51CC3 /* heightlight.bundle in Resources */,
+				534790EE21BAB65F00E51CC3 /* ic_launcher.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,13 +282,19 @@
 		534790EB21BAB4DE00E51CC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QX5F9XSCJJ;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				INFOPLIST_FILE = ProvisionDart/Info.plist;
 				INSTALL_PATH = /Library/QuickLook;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sk.ProvisionDart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = qlgenerator;
 			};
 			name = Debug;
@@ -272,13 +302,20 @@
 		534790EC21BAB4DE00E51CC3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QX5F9XSCJJ;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				INFOPLIST_FILE = ProvisionDart/Info.plist;
 				INSTALL_PATH = /Library/QuickLook;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sk.ProvisionDart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = qlgenerator;
 			};
 			name = Release;

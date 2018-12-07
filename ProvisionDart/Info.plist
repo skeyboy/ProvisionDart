@@ -11,7 +11,9 @@
 			<string>QLGenerator</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>SUPPORTED_UTI_TYPE</string>
+				<string>com.apple.disk-image-dart</string>
+				<string>dyn.ah62d4rv4ge8043a</string>
+				<string>dyn.ah62d4rv4ge80445e</string>
 			</array>
 		</dict>
 	</array>
@@ -45,6 +47,11 @@
 	</dict>
 	<key>CFPlugInUnloadFunction</key>
 	<string></string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2018 sk. All rights reserved.</string>
 	<key>QLNeedsToBeRunInMainThread</key>
