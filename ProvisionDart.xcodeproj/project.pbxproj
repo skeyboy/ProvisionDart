@@ -14,6 +14,9 @@
 		534790F121BAB98B00E51CC3 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534790F021BAB98B00E51CC3 /* QuickLook.framework */; };
 		534790F321BAB99200E51CC3 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534790F221BAB99200E51CC3 /* AppKit.framework */; };
 		534790F721BAD63100E51CC3 /* heightlight.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 534790F621BAD63100E51CC3 /* heightlight.bundle */; };
+		5347910421BC2C5800E51CC3 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 5347910121BC2C5800E51CC3 /* Common.m */; };
+		5347910521BC2C5800E51CC3 /* colorize.sh in Resources */ = {isa = PBXBuildFile; fileRef = 5347910221BC2C5800E51CC3 /* colorize.sh */; };
+		5347910621BC2C5800E51CC3 /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = 5347910321BC2C5800E51CC3 /* Common.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		534790F021BAB98B00E51CC3 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		534790F221BAB99200E51CC3 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		534790F621BAD63100E51CC3 /* heightlight.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = heightlight.bundle; sourceTree = "<group>"; };
+		5347910121BC2C5800E51CC3 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		5347910221BC2C5800E51CC3 /* colorize.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = colorize.sh; sourceTree = "<group>"; };
+		5347910321BC2C5800E51CC3 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +71,9 @@
 				534790ED21BAB65E00E51CC3 /* ic_launcher.png */,
 				534790E121BAB4DE00E51CC3 /* GenerateThumbnailForURL.c */,
 				534790E321BAB4DE00E51CC3 /* GeneratePreviewForURL.c */,
+				5347910221BC2C5800E51CC3 /* colorize.sh */,
+				5347910321BC2C5800E51CC3 /* Common.h */,
+				5347910121BC2C5800E51CC3 /* Common.m */,
 				534790E521BAB4DE00E51CC3 /* main.c */,
 				534790E721BAB4DE00E51CC3 /* Info.plist */,
 			);
@@ -87,6 +96,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5347910621BC2C5800E51CC3 /* Common.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +157,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5347910521BC2C5800E51CC3 /* colorize.sh in Resources */,
 				534790F721BAD63100E51CC3 /* heightlight.bundle in Resources */,
 				534790EE21BAB65F00E51CC3 /* ic_launcher.png in Resources */,
 			);
@@ -159,6 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5347910421BC2C5800E51CC3 /* Common.m in Sources */,
 				534790E221BAB4DE00E51CC3 /* GenerateThumbnailForURL.c in Sources */,
 				534790E421BAB4DE00E51CC3 /* GeneratePreviewForURL.c in Sources */,
 				534790E621BAB4DE00E51CC3 /* main.c in Sources */,

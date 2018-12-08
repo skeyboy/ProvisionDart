@@ -2,6 +2,7 @@
 #include <CoreServices/CoreServices.h>
 #include <QuickLook/QuickLook.h>
 #import <AppKit/AppKit.h>
+#import "Common.h"
 OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options);
 void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview);
 
@@ -13,27 +14,56 @@ void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview);
 
 OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options)
 {
-    // To complete your generator please implement the function GeneratePreviewForURL in GeneratePreviewForURL.c
-    NSURL *URL = (__bridge NSURL *)url;
-NSString * dartContent = [[NSString alloc] initWithContentsOfURL:URL
-                                                        encoding:NSUTF8StringEncoding
-                                                           error:nil];
+#ifdef DEBUG
+    NSDate *startDate = [NSDate date];
+#endif
+    n8log(@"Generating Preview");
+    if (QLPreviewRequestIsCancelled(preview))
+        return noErr;
     
-    NSDictionary *properties = @{ // properties for the HTML data
-        (__bridge NSString *)kQLPreviewPropertyTextEncodingNameKey : @"UTF-8",
-        (__bridge NSString *)kQLPreviewPropertyMIMETypeKey : @"text/html" };
-//    DART_CONTENT
-    NSURL *bundleURL = [[NSBundle bundleWithIdentifier:@"com.sk.ProvisionDart"] URLForResource:@"heightlight" withExtension:@"bundle"];
-    NSURL *templateURL =  [[[NSBundle alloc] initWithURL:bundleURL] URLForResource:@"Template" withExtension:@"html"];
     
-    NSMutableString * templateContent = [[NSMutableString alloc] initWithContentsOfURL:templateURL
-encoding:NSUTF8StringEncoding error:nil];
+    // Invoke colorize.sh
+    CFBundleRef bundle = QLPreviewRequestGetGeneratorBundle(preview);
+    int status;
     
-    NSString *finalContent = [templateContent stringByReplacingOccurrencesOfString:@"$DART_CONTENT" withString:dartContent];
-
+    NSData *output = colorizeURL(bundle, url, &status, 0);
+    n8log(@"Generated preview html page in %.3f sec",
+          -[startDate timeIntervalSinceNow] );
     
-    QLPreviewRequestSetDataRepresentation(preview, (__bridge CFDataRef)[finalContent dataUsingEncoding:NSUTF8StringEncoding], kUTTypeHTML, (__bridge CFDictionaryRef)properties);
+    NSData *rtf = nil;
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"com.sk.ProvisionDart"];
+    BOOL use_rtf = [defaults boolForKey:@"rtfPreview"];
+ 
+    if (use_rtf) {
+        NSDictionary *attrs;
+        NSAttributedString *string = [[NSAttributedString alloc] initWithHTML:output documentAttributes:&attrs];
+        NSRange range = NSMakeRange(0, [string length]);
+        rtf = [string RTFFromRange:range documentAttributes:attrs];
+     }
     
+    if (status != 0 || QLPreviewRequestIsCancelled(preview)) {
+#ifndef DEBUG
+        goto done;
+#endif
+    }
+    // Now let WebKit do its thing
+    NSString *textEncoding = [[NSUserDefaults standardUserDefaults]
+                              stringForKey:@"webkitTextEncoding"];
+    if (!textEncoding || [textEncoding length] == 0)
+        textEncoding = @"UTF-8";
+    CFDictionaryRef properties =
+    (__bridge CFDictionaryRef)[NSDictionary dictionaryWithObject:textEncoding
+                                                 forKey:(NSString *)kQLPreviewPropertyTextEncodingNameKey];
+    
+    if (use_rtf)
+        QLPreviewRequestSetDataRepresentation(preview, (__bridge CFDataRef)rtf, kUTTypeRTF, properties);
+    else
+        QLPreviewRequestSetDataRepresentation(preview, (__bridge CFDataRef)output, kUTTypeHTML, properties);
+    
+#ifndef DEBUG
+done:
+#endif
+    n8log(@"Finished preview in %.3f sec", -[startDate timeIntervalSinceNow] );
     return noErr;
 }
 
